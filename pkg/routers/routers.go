@@ -1,6 +1,7 @@
 package routers
 
 import (
+	"github.com/marlonli/APIServerExercise/pkg/logger"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -21,10 +22,10 @@ func NewRouter() *mux.Router {
 	router := mux.NewRouter().StrictSlash(true)
 	for _, route := range routes {
 		router.
-		Methods(route.Method).
-		Path(route.Pattern).
-		Name(route.Name).
-		Handler(route.HandlerFunc)
+			Methods(route.Method).
+			Path(route.Pattern).
+			Name(route.Name).
+			Handler(route.HandlerFunc)
 	}
 
 	return router
@@ -32,21 +33,21 @@ func NewRouter() *mux.Router {
 
 var routes = Routes{
 	Route{
-	"PersistMetadata",
-	"POST",
-	"/persist",
-	handlers.PersistMetadata,
+		"PersistMetadata",
+		"POST",
+		"/v1/persist",
+		logger.Logger(handlers.PersistMetadata, "Persist MetaData"),
 	},
 	Route{
-	"GetMetadata",
-	"GET",
-	"/metadata",
-	handlers.GetMetadata,
+		"GetMetadata",
+		"GET",
+		"/v1/metadata",
+		logger.Logger(handlers.GetMetadata, "Get MetaData"),
 	},
 	Route{
-	"SearchMetadata",
-	"POST",
-	"/search",
-	handlers.SearchMetadata,
+		"SearchMetadata",
+		"POST",
+		"/v1/search",
+		logger.Logger(handlers.SearchMetadata, "Search MetaData"),
 	},
 }

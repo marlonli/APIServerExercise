@@ -1,13 +1,14 @@
 package handlers
 
 import (
-	"github.com/marlonli/APIServerExercise/common"
-	"github.com/marlonli/APIServerExercise/pkg/container"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"strings"
+
+	"github.com/marlonli/APIServerExercise/common"
+	"github.com/marlonli/APIServerExercise/pkg/container"
 )
 
 // An endpoint for persist metadata
@@ -24,11 +25,11 @@ func PersistMetadata(w http.ResponseWriter, req *http.Request) {
 
 		w.Header().Set("Content-Type", "text/yaml; charset=UTF-8")
 		w.WriteHeader(http.StatusOK)
-
-		err := yaml.NewEncoder(w).Encode(common.MetaList)
-		if err != nil {
-			log.Fatalf("error: %v", err)
-		}
+		w.Write([]byte("Persist successfully!"))
+		//err := yaml.NewEncoder(w).Encode(m)
+		//if err != nil {
+		//	log.Fatalf("error: %v", err)
+		//}
 	} else {
 		// Invalid payload
 		w.WriteHeader(http.StatusBadRequest)
