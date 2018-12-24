@@ -19,7 +19,7 @@ type Person struct {
 	Email string `yaml:"email"`
 }
 
-// Whether the name and email format is valid
+// Check whether the name and email format is valid
 func (p *Person) IsValid() bool {
 	numAt := strings.Count(p.Email, "@")
 	if numAt != 1 {
@@ -37,22 +37,22 @@ func (m *Metadata) Match(query string) bool {
 		strings.Contains(m.Website, query) || strings.Contains(m.Source, query) || strings.Contains(m.License, query) ||
 		strings.Contains(m.Description, query)
 	if match {
-		return true;
+		return true
 	}
 
 	// Whether the maintainers' information contains the query string
 	for _, person := range m.Maintainers {
 		if strings.Contains(person.Name, query) || strings.Contains(person.Email, query) {
-			match = true;
+			match = true
 			break
 		}
 	}
 	return match
 }
 
-// Whether the metadata is valid
+// Check whether the metadata is valid
 func (m *Metadata) IsValid() bool {
-	pValid := true
+	pValid := true // pValid indicates whether the maintainers' information is valid
 	for _, p := range m.Maintainers {
 		if !p.IsValid() {
 			pValid = false

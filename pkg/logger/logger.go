@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-// Logger is to print web log
+// Logger is a decorator for HandlerFunc to print web log
 func Logger(inner http.HandlerFunc, name string) http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		start := time.Now()

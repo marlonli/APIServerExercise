@@ -25,7 +25,7 @@ func PersistMetadata(w http.ResponseWriter, req *http.Request) {
 
 		w.Header().Set("Content-Type", "text/yaml; charset=UTF-8")
 		w.WriteHeader(http.StatusOK)
-		w.Write([]byte("Persist successfully!"))
+		w.Write([]byte("Persist completed!"))
 		//err := yaml.NewEncoder(w).Encode(m)
 		//if err != nil {
 		//	log.Fatalf("error: %v", err)
@@ -55,7 +55,7 @@ func SearchMetadata(w http.ResponseWriter, req *http.Request) {
 
 	var resultList []container.Metadata
 
-	//search metadata matches the request
+	//search for metadata that matches the request
 	for _, data := range common.MetaList {
 		if data.Match(strings.TrimSpace(string(body))) {
 			resultList = append(resultList, data)
